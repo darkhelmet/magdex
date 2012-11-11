@@ -1,10 +1,15 @@
 require 'spec_helper'
 
 describe Magdex do
+  before(:all) { Maglev::PERSISTENT_ROOT.clear; Maglev.commit_transaction }
   before(:each) { Maglev.abort_transaction }
 
   it 'should have a version' do
     Magdex::VERSION.should be_a(String)
+  end
+
+  it 'should be persistable' do
+    Magdex.maglev_persistable?.should be_true
   end
 
   it 'should list stores' do
