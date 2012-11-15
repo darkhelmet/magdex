@@ -14,8 +14,7 @@ A MagLev indexer for the persistent root
     end
 
     bob = User.new('Bob')
-    id = Users.store(bob) # => 1
-    bob.id == id # => true
+    Users.store(bob) # => true
 
     ...
 
@@ -23,7 +22,7 @@ A MagLev indexer for the persistent root
     bob2.name # => "Bob"
     bob == bob2 # => true
 
-    Users.index_by(:name) # => true
+    Users.index_by(:name, String) # => true
 
     bob3 = Users.find_by(:name => 'Bob').first
     bob3.name # => "Bob"

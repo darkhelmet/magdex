@@ -1,26 +1,24 @@
-Maglev.persistent do
-  module Magdex
-    VERSION = '0.0.1'
-    extend self
+require 'magdex/store'
 
-    def store_for(key)
-      store_hash.fetch(key) { store_hash[key] = Store.new(key) }
-    end
+module Magdex
+  VERSION = '0.0.1'
+  extend self
 
-    def stores
-      store_hash.keys
-    end
-
-  private
-
-    def proot
-      Maglev::PERSISTENT_ROOT
-    end
-
-    def store_hash
-      proot.fetch(:magdex) { |k| proot[k] = {} }
-    end
+  def store_for(key)
+    store_hash.fetch(key) { store_hash[key] = Store.new(key) }
   end
 
-  require 'magdex/store'
+  def stores
+    store_hash.keys
+  end
+
+private
+
+  def proot
+    Maglev::PERSISTENT_ROOT
+  end
+
+  def store_hash
+    proot.fetch(:magdex) { |k| proot[k] = {} }
+  end
 end
